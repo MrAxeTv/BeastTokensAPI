@@ -20,6 +20,7 @@ public interface ItemData {
      int getSlot();
 
      String getName();
+     //
 
      List<String> getCmd();
 
