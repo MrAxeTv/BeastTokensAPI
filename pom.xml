@@ -40,14 +40,6 @@
         </repository>
     </repositories>
 
-<!--   <dependencies>-->
-<!--      <dependency>-->
-<!--        <groupId>com.github.User</groupId>-->
-<!--        <artifactId>Repo</artifactId>-->
-<!--        <version>Tag</version>-->
-<!--      </dependency>-->
-<!--</dependencies>-->
-
 
 
 </project>
