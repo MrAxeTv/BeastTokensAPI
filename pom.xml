@@ -49,6 +49,13 @@
             <version>1.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <!--Mythic Mobs-->
+        <dependency>
+            <groupId>io.lumine.xikage.mythicmobs</groupId>
+            <artifactId>MythicMobs</artifactId>
+            <version>4.8</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 
