@@ -32,6 +32,13 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+<!--Mythic Mobs-->
+        <repository>
+            <id>nexus</id>
+            <name>Lumine Releases</name>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -51,9 +58,9 @@
         </dependency>
         <!--Mythic Mobs-->
         <dependency>
-            <groupId>io.lumine.xikage.mythicmobs</groupId>
+            <groupId>io.lumine.xikage</groupId>
             <artifactId>MythicMobs</artifactId>
-            <version>4.8</version>
+            <version>4.9.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
