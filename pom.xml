@@ -4,18 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <version>3.9.4</version>
-    <!--    <parent>-->
-<!--        <artifactId>BeastTokens</artifactId>-->
-<!--        <groupId>me.mraxetv</groupId>-->
-<!--        <version>3.9.4</version>-->
-<!--    </parent>-->
+        <parent>
+        <artifactId>BeastTokens</artifactId>
+        <groupId>me.mraxetv</groupId>
+        <version>3.9.4</version>
+    </parent>
 
 
 
 
-<!--    <properties>-->
-<!--        <minecraft.plugin.version>${project.version}</minecraft.plugin.version>-->
-<!--    </properties>-->
+    <properties>
+        <minecraft.plugin.version>${project.version}</minecraft.plugin.version>
+    </properties>
 
 
 

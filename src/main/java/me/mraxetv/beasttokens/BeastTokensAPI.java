@@ -14,7 +14,7 @@ public final class BeastTokensAPI {
 
     public static ShopManager getShopManger(){ return instance.getShopManager(); }
 
-    public static TokensManager getTokensManger(){ return instance.getTokensManager(); }
+    public static TokensManager getTokensManager(){ return instance.getTokensManager(); }
 
 
 }
