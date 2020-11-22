@@ -13,6 +13,7 @@ me\mraxetv\beasttokens\api\events\BTPostTransactionShopEvent.class
 me\mraxetv\beasttokens\api\wrappers\player\BTPlayer.class
 me\mraxetv\beasttokens\api\DropType.class
 me\mraxetv\beasttokens\api\events\tokendrops\mobs\BTPreMobTokenDropEvent.class
+me\mraxetv\beasttokens\api\events\BTokenRedeemEvent.class
 me\mraxetv\beasttokens\api\wrappers\shop\ItemData.class
 me\mraxetv\beasttokens\BeastTokensAPI.class
 me\mraxetv\beasttokens\api\events\tokendrops\mobs\BTMythicMobTokenDropEvent.class

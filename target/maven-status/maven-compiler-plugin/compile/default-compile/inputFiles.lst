@@ -15,6 +15,7 @@ C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\wrap
 C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\handlers\ShopManager.java
 C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\events\tokendrops\blocks\BTPreBlockTokenDropEvent.java
 C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\events\tokendrops\farming\BTPreFarmingTokenDropEvent.java
+C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\events\BTokenRedeemEvent.java
 C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\events\tokendrops\farming\BTFarmingTokenDropEvent.java
 C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\DropType.java
 C:\Plugins\BeastTokens_Maven\btapi\src\main\java\me\mraxetv\beasttokens\api\wrappers\player\OfflineBTPlayer.java
