@@ -1,14 +1,14 @@
 package me.mraxetv.beasttokens.api.events.tokendrops.fishing;
 
+import me.mraxetv.beasttokens.api.events.BTCurrencyEvent;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class BTPreFishingTokenDropEvent
-  extends Event implements Cancellable {
+  extends Event implements Cancellable, BTCurrencyEvent {
   private static final HandlerList HANDLERS = new HandlerList();
   private boolean cancelled;
   private Player player;
@@ -17,6 +17,7 @@ public class BTPreFishingTokenDropEvent
   private double percentageChance;
   private Material material;
   private boolean perWorld;
+  private final String currencyId;
   
   public void setChance(double chance) {
     this.chance = chance;
@@ -57,15 +58,24 @@ public class BTPreFishingTokenDropEvent
   }
   
   public BTPreFishingTokenDropEvent(Player p, double chance, double multiplierChance, double percentageChance, Material material, boolean perWorld) {
+    this(p, chance, multiplierChance, percentageChance, material, perWorld, BTCurrencyEvent.DEFAULT_CURRENCY_ID);
+  }
+
+  public BTPreFishingTokenDropEvent(Player p, double chance, double multiplierChance, double percentageChance, Material material, boolean perWorld, String currencyId) {
     this.player = p;
     this.chance = chance;
     this.multiplierChance = multiplierChance;
     this.percentageChance = percentageChance;
     this.material = material;
     this.perWorld = perWorld;
+    this.currencyId = BTCurrencyEvent.normalizeCurrencyId(currencyId);
   }
   public Player getPlayer() {
     return this.player;
+  }
+
+  public String getCurrencyId() {
+    return this.currencyId;
   }
 
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="252" height="64" viewBox="0 0 252 64" role="img" aria-labelledby="title desc">
+  <title id="title">Get BeastTokens on Spigot</title>
+  <desc id="desc">Purchase the full BeastTokens server plugin on Spigot.</desc>
+  <rect width="252" height="64" rx="10" fill="#242833"/>
+  <path d="M10 0h48v64H10A10 10 0 0 1 0 54V10A10 10 0 0 1 10 0Z" fill="#ee9d28"/>
+  <circle cx="29" cy="32" r="16" fill="none" stroke="#242833" stroke-width="3"/>
+  <path d="M25 22v20m0-18h7a4 4 0 0 1 0 8h-7m0 0h8a4 4 0 0 1 0 8h-8" fill="none" stroke="#242833" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Arial,Helvetica,sans-serif" fill="#ffffff">
+    <text x="74" y="26" font-size="12" fill="#e2e4e9">GET BEASTTOKENS ON</text>
+    <text x="74" y="48" font-size="22" font-weight="700">Spigot</text>
+  </g>
+  <path d="m225 27 5 5-5 5" fill="none" stroke="#ee9d28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

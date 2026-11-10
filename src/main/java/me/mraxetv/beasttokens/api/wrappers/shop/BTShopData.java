@@ -9,7 +9,7 @@ public interface BTShopData {
   
   BTItemData getItemData(String paramString);
   
-  boolean hasItemData(int paramInt);
+  boolean hasItemData(String id);
   
   FileConfiguration getConfig();
   

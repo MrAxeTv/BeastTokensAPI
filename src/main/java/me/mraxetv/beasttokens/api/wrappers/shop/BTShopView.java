@@ -1,13 +1,12 @@
 package me.mraxetv.beasttokens.api.wrappers.shop;
 
-public interface BTShopView<T extends BTItemData> {
-  T getClickedItem();
+public interface BTShopView<I extends BTItemData> {
+  I getClickedItem();
   
-  void setClickedItem(T item);
+  void setClickedItem(I item);
   
-  boolean hasOpenConfirmMenu();
-  
-  boolean setOpenConfirmMenu(boolean paramBoolean);
+  boolean isTransactionMenuOpen();
+
   
   int getShopPage();
   

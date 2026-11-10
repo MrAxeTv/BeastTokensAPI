@@ -1,50 +1,164 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-
-         <groupId>me.mraxetv.beasttokens</groupId>
+    <groupId>me.mraxetv.beasttokens</groupId>
     <artifactId>btapi</artifactId>
-    <name>btapi</name>
-         <version>3.15.0</version> 
+    <version>4.3.17</version>
+    <name>BeastTokens Developer API</name>
+    <description>Public integration API for the BeastTokens server plugin.</description>
+    <url>https://github.com/MrAxeTv/BeastTokensAPI</url>
 
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version> <!-- Use a recent version of the plugin -->
-            <configuration>
-                <source>1.8</source> <!-- Or any version >= 1.7 -->
-                <target>1.8</target> <!-- Or any version >= 1.7 -->
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-         
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <lombok.version>1.18.46</lombok.version>
+        <project.build.outputTimestamp>2026-11-10T00:00:00Z</project.build.outputTimestamp>
+    </properties>
 
-<repositories>
-    <repository>
-        <id>nexus</id>
-        <name>Lumine Releases</name>
-        <url>https://mvn.lumine.io/repository/maven-public/</url>
-    </repository>
-</repositories>
+    <scm>
+        <connection>scm:git:https://github.com/MrAxeTv/BeastTokensAPI.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/MrAxeTv/BeastTokensAPI.git</developerConnection>
+        <url>https://github.com/MrAxeTv/BeastTokensAPI</url>
+        <tag>4.3.17</tag>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>spigot-snapshots</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <releases><enabled>false</enabled></releases>
+        </repository>
+        <repository>
+            <id>lumine</id>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
+            <artifactId>spigot-api</artifactId>
             <version>1.18.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
             <version>5.6.2</version>
             <scope>provided</scope>
+            <optional>true</optional>
+            <exclusions>
+                <exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>BeastTokensAPI-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>prepare-javadoc-sources</id>
+                                <phase>generate-sources</phase>
+                                <goals><goal>run</goal></goals>
+                                <configuration>
+                                    <target>
+                                        <java classname="lombok.launch.Main" fork="true" failonerror="true">
+                                            <classpath>
+                                                <path refid="maven.plugin.classpath"/>
+                                                <path refid="maven.compile.classpath"/>
+                                            </classpath>
+                                            <arg value="delombok"/>
+                                            <arg value="${project.basedir}/src/main/java"/>
+                                            <arg value="-d"/>
+                                            <arg value="${project.build.directory}/delombok"/>
+                                            <arg value="--classpath"/>
+                                            <arg pathref="maven.compile.classpath"/>
+                                        </java>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals><goal>jar-no-fork</goal></goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.11.2</version>
+                        <configuration>
+                            <sourcepath>${project.build.directory}/delombok</sourcepath>
+                            <doclint>none</doclint>
+                            <detectLinks>false</detectLinks>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals><goal>jar</goal></goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

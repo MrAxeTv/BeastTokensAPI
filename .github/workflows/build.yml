@@ -1,0 +1,33 @@
+name: Build API
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Build binary, sources and Javadoc
+        run: mvn --batch-mode --no-transfer-progress -Prelease clean verify
+      - name: Verify API boundary and generate checksums
+        shell: pwsh
+        run: ./scripts/Verify-ApiRelease.ps1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: BeastTokensAPI
+          if-no-files-found: error
+          path: |
+            target/BeastTokensAPI-*.jar
+            target/SHA256SUMS

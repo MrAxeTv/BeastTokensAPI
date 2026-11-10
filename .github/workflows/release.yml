@@ -1,0 +1,56 @@
+name: Publish API release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Existing version tag, for example 4.3.17'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Validate version input
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          [[ "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/tags/${{ inputs.version }}
+          persist-credentials: false
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Build binary, sources and Javadoc
+        run: mvn --batch-mode --no-transfer-progress -Prelease clean verify
+      - name: Verify tagged version, API boundary and checksums
+        shell: pwsh
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: ./scripts/Verify-ApiRelease.ps1 -ExpectedVersion $env:RELEASE_VERSION
+      - name: Publish explicit API assets with archived notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          notes="updates/github/BeastTokensAPI-${RELEASE_VERSION}.md"
+          test -f "$notes"
+          gh release create "$RELEASE_VERSION" \
+            --verify-tag \
+            --title "BeastTokens Developer API ${RELEASE_VERSION}" \
+            --notes-file "$notes" \
+            "target/BeastTokensAPI-${RELEASE_VERSION}.jar" \
+            "target/BeastTokensAPI-${RELEASE_VERSION}-sources.jar" \
+            "target/BeastTokensAPI-${RELEASE_VERSION}-javadoc.jar" \
+            target/SHA256SUMS

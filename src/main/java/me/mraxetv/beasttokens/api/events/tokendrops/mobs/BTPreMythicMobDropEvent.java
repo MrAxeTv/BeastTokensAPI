@@ -1,6 +1,7 @@
 package me.mraxetv.beasttokens.api.events.tokendrops.mobs;
 
 import io.lumine.mythic.core.mobs.ActiveMob;
+import me.mraxetv.beasttokens.api.events.BTCurrencyEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -8,7 +9,7 @@ import org.bukkit.event.HandlerList;
 
 public class BTPreMythicMobDropEvent
   extends Event
-  implements Cancellable {
+  implements Cancellable, BTCurrencyEvent {
   private static final HandlerList HANDLERS = new HandlerList();
   private boolean cancelled;
   private Player player;
@@ -17,6 +18,7 @@ public class BTPreMythicMobDropEvent
   private double percentageChance;
   private ActiveMob mobType;
   private boolean perWorld;
+  private final String currencyId;
   
   public void setChance(double chance) {
     this.chance = chance;
@@ -43,25 +45,30 @@ public class BTPreMythicMobDropEvent
   }
   
   public BTPreMythicMobDropEvent(Player p, double chance, double multiplierChance, double percentageChance, ActiveMob mobType, boolean perWorld) {
+    this(p, chance, multiplierChance, percentageChance, mobType, perWorld, BTCurrencyEvent.DEFAULT_CURRENCY_ID);
+  }
+
+  public BTPreMythicMobDropEvent(Player p, double chance, double multiplierChance, double percentageChance, ActiveMob mobType, boolean perWorld, String currencyId) {
     this.player = p;
     this.chance = chance;
     this.multiplierChance = multiplierChance;
     this.percentageChance = percentageChance;
     this.mobType = mobType;
     this.perWorld = perWorld;
+    this.currencyId = BTCurrencyEvent.normalizeCurrencyId(currencyId);
   }
   public Player getPlayer() {
     return this.player;
   }
 
+  public String getCurrencyId() {
+    return this.currencyId;
+  }
 
-  
   public ActiveMob getMobType() {
     return this.mobType;
   }
 
-
-  
   public boolean isCancelled() {
     return this.cancelled;
   }

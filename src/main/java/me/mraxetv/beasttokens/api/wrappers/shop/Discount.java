@@ -3,6 +3,7 @@ package me.mraxetv.beasttokens.api.wrappers.shop;
 import lombok.Getter;
 
 public abstract class Discount {
+
     protected double amount;
     @Getter
     protected int priority;
@@ -14,7 +15,8 @@ public abstract class Discount {
 
     public abstract double applyDiscount(double originalPrice);
 
-    public abstract String getDiscountAmountFormated();
+    public abstract String getDiscountAmountFormated(double originalPrice);
+
 
     public abstract String getType();
 

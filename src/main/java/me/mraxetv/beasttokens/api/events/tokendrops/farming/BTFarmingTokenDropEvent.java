@@ -1,5 +1,9 @@
 package me.mraxetv.beasttokens.api.events.tokendrops.farming;
 
+import lombok.Getter;
+import lombok.Setter;
+import me.mraxetv.beasttokens.api.events.BTCurrencyEvent;
+import me.mraxetv.beasttokens.api.events.BTTransactionReason;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -7,75 +11,52 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class BTFarmingTokenDropEvent
-  extends Event implements Cancellable {
+  extends Event implements Cancellable, BTCurrencyEvent {
   private static final HandlerList HANDLERS = new HandlerList();
   
   private boolean cancelled;
 
   private double customMultiplier;
   
+  @Getter
+  @Setter
   private Player player;
+  @Getter
+  @Setter
   private double tokens;
-  
-  public void setTokens(double tokens) {
-    this.tokens = tokens;
-  }
-  private Block block; private double multiplierTokens; private double percentageTokens;
-  public double getTotalTokens() {
-    return this.tokens + getMultiplierTokens() + getPercentageTokens();
-  }
+
+    @Getter
+    private Block block; @Getter
+    @Setter
+    private double multiplierTokens; @Getter
+    @Setter
+    private double percentageTokens;
+    @Getter
+    private final String currencyId;
 
 
-  public void setMultiplierTokens(double multiplierTokens) {
-    this.multiplierTokens = multiplierTokens;
-  }
-  
-  public double getMultiplierTokens() {
-    return this.multiplierTokens;
-  }
-  
-  public void setPlayer(Player player) {
-    this.player = player;
-  }
-  
-  public void setPercentageTokens(double percentageTokens) {
-    this.percentageTokens = percentageTokens;
+    public BTFarmingTokenDropEvent(Player p, double tokens, double multiplierTokens, double percentageTokens, Block block, double custom) {
+    this(p, tokens, multiplierTokens, percentageTokens, block, custom, BTCurrencyEvent.DEFAULT_CURRENCY_ID);
   }
 
-
-  
-  public double getPercentageTokens() {
-    return this.percentageTokens;
-  }
-
-  
-  public Player getPlayer() {
-    return this.player;
-  }
-
-  
-  public Block getBlock() {
-    return this.block;
-  }
-  
-  public double getTokens() {
-    return this.tokens;
-  }
-
-  
-  public BTFarmingTokenDropEvent(Player p, double tokens, double multiplierTokens, double percentageTokens, Block block, double custom) {
+  public BTFarmingTokenDropEvent(Player p, double tokens, double multiplierTokens, double percentageTokens, Block block, double custom, String currencyId) {
     this.player = p;
     this.multiplierTokens = multiplierTokens;
     this.percentageTokens = percentageTokens;
     this.tokens = tokens;
     this.block = block;
     this.customMultiplier = custom;
+    this.currencyId = BTCurrencyEvent.normalizeCurrencyId(currencyId);
   }
 
 
   
   public boolean isCancelled() {
     return this.cancelled;
+  }
+
+  public BTTransactionReason getTransactionReason() {
+    return BTTransactionReason.DROP;
   }
 
   public boolean hasCustomMultiplier(){
