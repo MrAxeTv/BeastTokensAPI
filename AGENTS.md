@@ -20,7 +20,7 @@
 
 - Build with `mvn -Prelease clean verify`, then run `scripts/Verify-ApiRelease.ps1` (PowerShell 7: `pwsh -File scripts/Verify-ApiRelease.ps1 -ExpectedVersion <version>`). The script verifies the API boundary and creates checksums.
 - Publish only `BeastTokensAPI-<version>.jar`, `BeastTokensAPI-<version>-sources.jar`, `BeastTokensAPI-<version>-javadoc.jar` and `SHA256SUMS`. Review the staged source tree and ancestry before pushing. Never upload paid plugin, proxy, BeastLib or extension JARs.
-- Publish a fresh matching version tag, preserve older releases, and use the complete archived Markdown post as the release body. The manually dispatched `Publish API release` workflow accepts an existing version tag and performs build, verification and asset publication.
+- Create and push the matching version tag if it does not exist; never move an existing published tag. Preserve older releases and use the complete archived Markdown post as the release body. The manually dispatched `Publish API release` workflow accepts an existing version tag and performs build, verification and asset publication.
 - Verify the published release is public, its four assets are present, the downloaded hashes match `SHA256SUMS`, and both purchase buttons serve the intended artwork and link to the correct listings. Preserve published tags and binary assets when correcting release text or artwork.
 
 ## Purchase button artwork
