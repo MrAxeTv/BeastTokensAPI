@@ -1,6 +1,6 @@
 # BeastTokens Developer API 4.3.17
 
-[![Get BeastTokens on Spigot](https://raw.githubusercontent.com/MrAxeTv/BeastTokensAPI/4.3.17/.github/assets/get-beasttokens-spigot.svg)](https://www.spigotmc.org/resources/beasttokens-multishop-mob-and-block-token-drops.20806/) [![Get BeastTokens on BuiltByBit](https://raw.githubusercontent.com/MrAxeTv/BeastTokensAPI/4.3.17/.github/assets/get-beasttokens-builtbybit.svg)](https://builtbybit.com/resources/beasttokens.28772/)
+[![Get BeastTokens on Spigot](https://raw.githubusercontent.com/MrAxeTv/BeastTokensAPI/ca2370c8358748ee503f7ec113be5cdbd6374492/.github/assets/get-beasttokens-spigot.svg)](https://www.spigotmc.org/resources/beasttokens-multishop-mob-and-block-token-drops.20806/) [![Get BeastTokens on BuiltByBit](https://raw.githubusercontent.com/MrAxeTv/BeastTokensAPI/ca2370c8358748ee503f7ec113be5cdbd6374492/.github/assets/get-beasttokens-builtbybit.svg)](https://builtbybit.com/resources/beasttokens.28772/)
 
 Developer API for integrating with **BeastTokens 4.3.17**. The full BeastTokens plugin is required on the server. Download the API JAR from **Assets** below and use it as a `provided` / `compileOnly` dependency.
 
